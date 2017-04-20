@@ -18,6 +18,11 @@
             vm.swaggerEnabled = response.swaggerEnabled;
         });
 
+        Principal.identity().then(function(account) {
+            vm.account = account;
+        });
+
+
         vm.login = login;
         vm.logout = logout;
         vm.toggleNavbar = toggleNavbar;
@@ -30,6 +35,7 @@
         }
 
         function logout() {
+            vm.account = null;
             collapseNavbar();
             Auth.logout();
             $state.go('home');

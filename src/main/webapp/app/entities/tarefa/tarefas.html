@@ -1,0 +1,85 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+
+            <h2>Tarefas Disponíveis</h2>
+            <jhi-alert></jhi-alert>
+
+            <button class="btn btn-primary" ui-sref="tarefa.new">
+                <span>Nova Tarefa</span>
+            </button>
+
+            <br>
+
+            <div id="list-tarefas" ng-repeat="tarefa in vm.tarefas track by tarefa.id" ng-click="vm.openDetail(tarefa)">
+                <div class="jumbotron">
+                    <p>{{tarefa.id}}</p>
+                    <p>{{tarefa.descricao}}</p>
+                    <div ng-show="tarefa.userLogin">
+                        <span class="glyphicon glyphicon-user"
+                              aria-hidden="true">Atribuida para {{tarefa.userLogin}}</span>
+                    </div>
+                    <span class="glyphicon glyphicon-calendar" aria-hidden="true">Criada em {{tarefa.dataCriacao | date:'dd-MM-yyyy'}}</span>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-md-6">
+            <br><br><br><br><br>
+            <div ng-show="vm.showDetail">
+                <div ng-show="!vm.tarefaSelecionada.userLogin">
+                    Tarefa sem Atribuiçao |
+                    <button class="btn btn-primary" ng-click="vm.pegarTarefa(vm.tarefaSelecionada)">
+                        <span>Pegar Tarefa</span>
+                    </button>
+                </div>
+
+                <div ng-show="vm.tarefaSelecionada.userId == vm.account.id">
+                    Tarefa atribuída para voce |
+                    <button class="btn btn-primary" ng-click="vm.largarTarefa(vm.tarefaSelecionada)">
+                        <span>Largar Tarefa</span>
+                    </button>
+                </div>
+
+                <div ng-show="vm.tarefaSelecionada.userId && vm.tarefaSelecionada.userId  != vm.account.id">
+                    Tarefa Atribuída para {{vm.tarefaSelecionada.userLogin}}
+                </div>
+
+                <form name="updateForm">
+
+                    <div class="jumbotron">
+
+                        <label class="control-label">Codigo</label>
+                        <p>{{vm.tarefaSelecionada.id}}</p>
+                        <label class="control-label">Data Criaçao</label>
+                        <p>{{vm.tarefaSelecionada.dataCriacao | date:'dd-MM-yyyy'}} </p>
+                        <label class="control-label">Descrição</label>
+                        <p>{{vm.tarefaSelecionada.descricao}}</p>
+                        <label class="control-label" for="field_resposta">Resposta</label>
+                        <textarea class="form-control" rows="3" placeholder="Digite sua resposta para a Tarefa"
+                                  name="resposta" id="field_resposta"
+                                  ng-model="vm.tarefaSelecionada.resposta"
+                                  required ng-readonly="!vm.tarefaSelecionada.userLogin">
+                    </textarea>
+
+                    </div>
+
+                    <div ng-show="vm.tarefaSelecionada.userId == vm.account.id">
+                        <button ng-disabled="updateForm.$invalid" class="btn btn-primary"
+                                ng-click="vm.salvarTarefa(vm.tarefaSelecionada)">
+                            <span>Salvar Tarefa</span>
+                        </button>
+                        <button class="btn btn-primary" ng-click="vm.completarTarefa(vm.tarefaSelecionada)">
+                            <span>Completar Tarefa</span>
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>

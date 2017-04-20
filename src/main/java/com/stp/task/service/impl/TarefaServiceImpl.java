@@ -1,20 +1,16 @@
 package com.stp.task.service.impl;
 
-import com.stp.task.service.TarefaService;
 import com.stp.task.domain.Tarefa;
 import com.stp.task.repository.TarefaRepository;
+import com.stp.task.service.TarefaService;
 import com.stp.task.service.dto.TarefaDTO;
 import com.stp.task.service.mapper.TarefaMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
-
-import java.util.LinkedList;
-import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Service Implementation for managing Tarefa.
@@ -24,7 +20,7 @@ import java.util.stream.Collectors;
 public class TarefaServiceImpl implements TarefaService{
 
     private final Logger log = LoggerFactory.getLogger(TarefaServiceImpl.class);
-    
+
     private final TarefaRepository tarefaRepository;
 
     private final TarefaMapper tarefaMapper;
@@ -51,7 +47,7 @@ public class TarefaServiceImpl implements TarefaService{
 
     /**
      *  Get all the tarefas.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
