@@ -43,7 +43,9 @@
                 $uibModalInstance.close();
                 if ($state.current.name === 'register' || $state.current.name === 'activate' ||
                     $state.current.name === 'finishReset' || $state.current.name === 'requestReset') {
+
                     $state.go('home');
+
 
                 }
 
